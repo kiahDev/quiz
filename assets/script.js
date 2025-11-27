@@ -193,4 +193,7 @@ const questions = [
 
 let randomIndex = Math.floor(Math.random() * questions.length);
 let randomQuestion = questions[randomIndex];
-console.log(randomQuestion.question)
+
+const loadQuestion = document.getElementById('question-text');
+
+loadQuestion.textContent = randomQuestion.question;
