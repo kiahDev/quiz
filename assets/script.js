@@ -42,7 +42,16 @@ const choiceButtons = document.querySelectorAll('.choice-btn');
 
 choiceButtons.forEach(function(button, index) {
     button.textContent = randomQuestion.choices[index];
+
+    button.onclick = function() {
+        if (button.textContent === randomQuestion.answer) {
+            alert('Correct!');
+        } else {
+            alert(`Wrong! Correct answer: ${randomQuestion.answer}`);
+        }
+    }
 });
 
 loadQuestion.textContent = randomQuestion.question;
+
 
