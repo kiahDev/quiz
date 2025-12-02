@@ -33,25 +33,24 @@ const questions = [
     { question: 'What river was Jesus baptized in?', choices: ['Jordan', 'Nile', 'Euphrates', 'Tigris'], answer: 'Jordan' }
 ];
 
+const questionTxt = document.getElementById('question-text');
+const choiceBtn = document.querySelectorAll('.choice-btn');
 const randomIndex = Math.floor(Math.random() * questions.length);
 const randomQuestion = questions[randomIndex];
-questions.splice(randomIndex, 1);
+let isOver = false;
 
-const loadQuestion = document.getElementById('question-text');
-const choiceButtons = document.querySelectorAll('.choice-btn');
+questionTxt.textContent = randomQuestion.question;
 
-choiceButtons.forEach(function(button, index) {
-    button.textContent = randomQuestion.choices[index];
+choiceBtn.forEach(function(button, index) {
 
-    button.onclick = function() {
+    button.textContent = randomQuestion.choices[index]
+
+    button.addEventListener('click', function() {
         if (button.textContent === randomQuestion.answer) {
-            alert('Correct!');
+            button.style.backgroundColor = 'green';
         } else {
-            alert(`Wrong! Correct answer: ${randomQuestion.answer}`);
+            button.style.backgroundColor = 'red';
         }
-    }
+    })
 });
-
-loadQuestion.textContent = randomQuestion.question;
-
 
