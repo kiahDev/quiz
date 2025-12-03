@@ -35,22 +35,48 @@ const questions = [
 
 const questionTxt = document.getElementById('question-text');
 const choiceBtn = document.querySelectorAll('.choice-btn');
-const randomIndex = Math.floor(Math.random() * questions.length);
-const randomQuestion = questions[randomIndex];
-let isOver = false;
+const progressTxt = document.getElementById('progress');
 
-questionTxt.textContent = randomQuestion.question;
+let score = 0;
+let questionNum = 1;
 
-choiceBtn.forEach(function(button, index) {
+function askQuestion() {
 
-    button.textContent = randomQuestion.choices[index]
+    if (questionNum < 11) {
 
-    button.addEventListener('click', function() {
-        if (button.textContent === randomQuestion.answer) {
-            button.style.backgroundColor = 'green';
-        } else {
-            button.style.backgroundColor = 'red';
-        }
-    })
-});
+        const randomIndex = Math.floor(Math.random() * questions.length);
+        const randomQuestion = questions[randomIndex];
+
+        questionTxt.textContent = randomQuestion.question;
+        progressTxt.textContent = `Question ${questionNum} of 10`;
+
+        choiceBtn.forEach(function(button, index) {
+            button.textContent = randomQuestion.choices[index];
+            button.style.backgroundColor = '';
+
+            button.onclick = function() {
+                if (button.textContent === randomQuestion.answer) {
+                    button.style.backgroundColor = 'green';
+                    score++;
+                } else {
+                    choiceBtn.forEach(function(button) {
+                        if (button.textContent === randomQuestion.answer) {
+                            button.style.backgroundColor = 'green';
+                        }
+                    });
+
+                    button.style.backgroundColor = 'red';
+                };
+                questionNum++;
+                questions.splice(randomIndex, 1);
+                setTimeout(askQuestion, 1000);
+            };
+        });
+    } else {
+        alert(`Quiz finished! Score : ${score}`);
+    }
+}
+
+askQuestion();
+
 
