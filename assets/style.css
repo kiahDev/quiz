@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, rgb(157, 78, 221), rgb(123, 104, 238));
+    background-color: #FCF6B1;
     height: 100vh;
 
     display: flex;
