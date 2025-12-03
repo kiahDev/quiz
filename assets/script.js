@@ -21,7 +21,7 @@ const questions = [
     { question: "Who interpreted Pharaoh's dream?", choices: ['Daniel', 'Joseph', 'Moses', 'Samuel'], answer: 'Joseph' },
     { question: 'How many plagues did God send on Egypt?', choices: ['5', '7', '10', '12'], answer: '10' },
     { question: 'Who was known as the weeping prophet?', choices: ['Jeremiah', 'Isaiah', 'Ezekiel', 'Daniel'], answer: 'Jeremiah' },
-    { question: 'Which apostle wrote Revelation?', choices: ['John', 'Peter', 'Paul', 'James'], answer: 'John' },
+    { question: 'Which apostle wrote Revelation?', choices: ['John', 'Peter', 'Paul', 'James'], answer: 'John', answer: 'Revelation' },
     { question: 'What is the fruit of the Spirit?', choices: ['Love, Joy, Peace', 'Wealth, Power, Fame', 'Faith, Hope, Fear', 'Strength, Honor, Pride'], answer: 'Love, Joy, Peace' },
     { question: 'How many days did Jesus fast in the wilderness?', choices: ['20', '30', '40', '50'], answer: '40' },
     { question: 'Who was the first murderer in the Bible?', choices: ['Cain', 'Abel', 'Lamech', 'Esau'], answer: 'Cain' },
@@ -55,6 +55,11 @@ function askQuestion() {
             button.style.backgroundColor = '';
 
             button.onclick = function() {
+                
+                choiceBtn.forEach(function(button) {
+                    button.disabled = true;
+                });
+
                 if (button.textContent === randomQuestion.answer) {
                     button.style.backgroundColor = 'green';
                     score++;
@@ -69,7 +74,13 @@ function askQuestion() {
                 };
                 questionNum++;
                 questions.splice(randomIndex, 1);
-                setTimeout(askQuestion, 1000);
+                setTimeout(function() {
+                    choiceBtn.forEach(function(button) {
+                        button.disabled = false;
+                    });
+
+                    askQuestion();
+                }, 1000);
             };
         });
     } else {
