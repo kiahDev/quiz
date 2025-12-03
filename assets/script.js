@@ -58,6 +58,7 @@ function askQuestion() {
                 
                 choiceBtn.forEach(function(button) {
                     button.disabled = true;
+                    button.style.color = 'white';
                 });
 
                 if (button.textContent === randomQuestion.answer) {
@@ -77,6 +78,7 @@ function askQuestion() {
                 setTimeout(function() {
                     choiceBtn.forEach(function(button) {
                         button.disabled = false;
+                        button.style.color = 'black';
                     });
 
                     askQuestion();
