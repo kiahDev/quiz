@@ -86,7 +86,7 @@ function askQuestion() {
             };
         });
     } else {
-        alert(`Quiz finished! Score : ${score}`);
+        alert(`Quiz finished! Score : ${score}/10`);
     }
 }
 
